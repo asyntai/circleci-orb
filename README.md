@@ -1,11 +1,11 @@
-# Asyntai knowledge sync orb for CircleCI
+# Asyntai AI docs sync orb for CircleCI
 
 Keep the [Asyntai](https://asyntai.com) AI chatbot on your website current with
 the documentation in your repository. Add one step to a pipeline. Every page you
 change is in the chatbot's knowledge base by the end of the build, so visitors
 get the answer that matches the version you just shipped.
 
-Orb slug: `asyntai/knowledge-sync`
+Orb slug: `asyntai/ai-docs-sync`
 
 ## Use it
 
@@ -13,7 +13,7 @@ Orb slug: `asyntai/knowledge-sync`
 version: 2.1
 
 orbs:
-  asyntai: asyntai/knowledge-sync@1.0.0
+  asyntai: asyntai/ai-docs-sync@1.0.0
 
 workflows:
   publish-docs:
@@ -104,8 +104,8 @@ generated and must not be edited by hand.
 
 ```bash
 circleci namespace create asyntai github asyntai
-circleci orb create asyntai/knowledge-sync
-circleci orb publish orb.yml asyntai/knowledge-sync@1.0.0
+circleci orb create asyntai/ai-docs-sync
+circleci orb publish orb.yml asyntai/ai-docs-sync@1.0.0
 ```
 
 ## Licence

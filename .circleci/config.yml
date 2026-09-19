@@ -34,7 +34,7 @@ workflows:
       - test
 
       - orb-tools/publish:
-          orb_name: asyntai/knowledge-sync
+          orb_name: asyntai/ai-docs-sync
           vcs_type: github
           pub_type: production
           requires:

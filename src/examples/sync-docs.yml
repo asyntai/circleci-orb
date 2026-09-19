@@ -8,7 +8,7 @@ usage:
   version: 2.1
 
   orbs:
-    asyntai: asyntai/knowledge-sync@1.0.0
+    asyntai: asyntai/ai-docs-sync@1.0.0
 
   workflows:
     publish-docs:
