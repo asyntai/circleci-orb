@@ -1,0 +1,12 @@
+version: 2.1
+
+description: >
+  Keep your Asyntai AI chatbot current with the documentation in your
+  repository. Add one step to a pipeline and every page you change is in the
+  chatbot's knowledge base by the end of the build, so visitors get the answer
+  that matches the version you just shipped. Asyntai answers website visitors
+  from your own content. See https://asyntai.com
+
+display:
+  home_url: https://asyntai.com
+  source_url: https://github.com/asyntai/circleci-orb

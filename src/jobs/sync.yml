@@ -1,0 +1,71 @@
+description: >
+  Check out the repository and send its documentation to the Asyntai knowledge
+  base. Use this job when you want the sync to run on its own. Use the sync
+  command instead when you want the step inside a job you already have.
+
+executor: <<parameters.executor>>
+
+parameters:
+  executor:
+    description: The executor to run in.
+    type: executor
+    default: default
+
+  path:
+    description: The file or folder to read, relative to the working directory.
+    type: string
+
+  patterns:
+    description: Comma separated file patterns to include.
+    type: string
+    default: "*.md,*.mdx,*.txt"
+
+  exclude:
+    description: Comma separated patterns to skip.
+    type: string
+    default: ""
+
+  title-prefix:
+    description: Text put in front of every entry title.
+    type: string
+    default: ""
+
+  website-id:
+    description: The Asyntai website to write to. Leave empty for your first website.
+    type: string
+    default: ""
+
+  api-key-var:
+    description: The environment variable that holds your Asyntai API key.
+    type: env_var_name
+    default: ASYNTAI_API_KEY
+
+  base-url:
+    description: The Asyntai address. Change this only for a private install.
+    type: string
+    default: "https://asyntai.com"
+
+  prune:
+    description: >
+      Remove knowledge base entries that carry your title prefix and whose file
+      is gone from the repository.
+    type: boolean
+    default: false
+
+  dry-run:
+    description: List the files and send nothing.
+    type: boolean
+    default: false
+
+steps:
+  - checkout
+  - sync:
+      path: <<parameters.path>>
+      patterns: <<parameters.patterns>>
+      exclude: <<parameters.exclude>>
+      title-prefix: <<parameters.title-prefix>>
+      website-id: <<parameters.website-id>>
+      api-key-var: <<parameters.api-key-var>>
+      base-url: <<parameters.base-url>>
+      prune: <<parameters.prune>>
+      dry-run: <<parameters.dry-run>>

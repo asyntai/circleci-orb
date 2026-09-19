@@ -1,0 +1,11 @@
+description: >
+  A small image that already holds Python 3, which the sync step uses.
+
+parameters:
+  tag:
+    description: The cimg/python image tag to run.
+    type: string
+    default: "3.12"
+
+docker:
+  - image: cimg/python:<<parameters.tag>>

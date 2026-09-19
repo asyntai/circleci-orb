@@ -1,0 +1,30 @@
+description: >
+  Add the sync step to a job you already have, after the build that writes your
+  documentation. On a pull request the step runs in dry run mode, so you see the
+  list of files without changing the knowledge base.
+
+usage:
+  version: 2.1
+
+  orbs:
+    asyntai: asyntai/knowledge-sync@1.0.0
+
+  jobs:
+    build-docs:
+      docker:
+        - image: cimg/python:3.12
+      steps:
+        - checkout
+        - run:
+            name: Build the documentation
+            command: make html
+        - asyntai/sync:
+            path: build/html
+            patterns: "*.html,*.md"
+            exclude: "search.html,genindex.html"
+            title-prefix: "Handbook / "
+
+  workflows:
+    docs:
+      jobs:
+        - build-docs

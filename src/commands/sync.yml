@@ -1,0 +1,67 @@
+description: >
+  Send the documentation files in your repository to the Asyntai knowledge
+  base. Each file becomes one entry. A file keeps the same entry on every run,
+  so the pipeline can run on every commit without making duplicates.
+
+parameters:
+  path:
+    description: The file or folder to read, relative to the working directory.
+    type: string
+
+  patterns:
+    description: Comma separated file patterns to include.
+    type: string
+    default: "*.md,*.mdx,*.txt"
+
+  exclude:
+    description: Comma separated patterns to skip, for example "CHANGELOG.md,drafts/*".
+    type: string
+    default: ""
+
+  title-prefix:
+    description: Text put in front of every entry title, for example "Docs / ".
+    type: string
+    default: ""
+
+  website-id:
+    description: The Asyntai website to write to. Leave empty for your first website.
+    type: string
+    default: ""
+
+  api-key-var:
+    description: The environment variable that holds your Asyntai API key.
+    type: env_var_name
+    default: ASYNTAI_API_KEY
+
+  base-url:
+    description: The Asyntai address. Change this only for a private install.
+    type: string
+    default: "https://asyntai.com"
+
+  prune:
+    description: >
+      Remove knowledge base entries that carry your title prefix and whose file
+      is gone from the repository. Set title-prefix as well, so the step only
+      removes entries it owns.
+    type: boolean
+    default: false
+
+  dry-run:
+    description: List the files and send nothing. Useful on a pull request.
+    type: boolean
+    default: false
+
+steps:
+  - run:
+      name: Send documentation to Asyntai
+      environment:
+        ASYNTAI_ORB_PATH: <<parameters.path>>
+        ASYNTAI_ORB_PATTERNS: <<parameters.patterns>>
+        ASYNTAI_ORB_EXCLUDE: <<parameters.exclude>>
+        ASYNTAI_ORB_TITLE_PREFIX: <<parameters.title-prefix>>
+        ASYNTAI_ORB_WEBSITE_ID: <<parameters.website-id>>
+        ASYNTAI_ORB_KEY_VAR: <<parameters.api-key-var>>
+        ASYNTAI_ORB_BASE_URL: <<parameters.base-url>>
+        ASYNTAI_ORB_PRUNE: <<parameters.prune>>
+        ASYNTAI_ORB_DRY_RUN: <<parameters.dry-run>>
+      command: <<include(scripts/sync.sh)>>

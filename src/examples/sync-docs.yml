@@ -1,0 +1,21 @@
+description: >
+  Send the docs folder to Asyntai every time the main branch changes, so the
+  chatbot on your website answers from the documentation you just shipped.
+  Store your Asyntai API key in the project as the environment variable
+  ASYNTAI_API_KEY.
+
+usage:
+  version: 2.1
+
+  orbs:
+    asyntai: asyntai/knowledge-sync@1.0.0
+
+  workflows:
+    publish-docs:
+      jobs:
+        - asyntai/sync:
+            path: docs
+            title-prefix: "Docs / "
+            filters:
+              branches:
+                only: main
